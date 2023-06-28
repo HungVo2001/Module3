@@ -1,41 +1,10 @@
-CREATE TABLE `class` (
-  `ClassID` INT NOT NULL AUTO_INCREMENT,
-  `ClassName` VARCHAR(60) NOT NULL,
-  `StartDate` DATETIME NOT NULL,
-  `Status` BIT NULL,
-  PRIMARY KEY (`ClassID`)
-  );
-  
-  CREATE TABLE `student` (
-  `StudentID` INT NOT NULL AUTO_INCREMENT,
-  `StudentName` VARCHAR(30) NOT NULL,
-  `Address` VARCHAR(50) NULL,
-  `Phone` VARCHAR(20) NULL,
-  `Status` BIT NULL,
-  `ClassID` INT NOT NULL,
-  PRIMARY KEY (`StudentID`),
-  FOREIGN KEY (ClassID) REFERENCES class (ClassID)
-  );
-  
-  CREATE TABLE `subject` (
-  `SubID` INT NOT NULL,
-  `SubName` VARCHAR(30) NOT NULL,
-  `Credit` TINYINT NOT NULL DEFAULT 1 CHECK(Credit >=1) ,
-  `Status` BIT DEFAULT 1,
-  PRIMARY KEY (`SubID`)
-  );
-
-
-CREATE TABLE `quanlysinhvien`.`mark` (
-  `MarkID` INT NOT NULL AUTO_INCREMENT,
-  `SubID` INT NOT NULL,
-  `StudentID` INT NOT NULL,
-  `Mark` FLOAT NULL DEFAULT 0 CHECK ( Mark BETWEEN 0 AND 100),
-  `ExamTimes` TINYINT DEFAULT 1,
-  PRIMARY KEY (`MarkID`),
-  UNIQUE (SubID, StudentID),
-  FOREIGN KEY (SubID) REFERENCES subject (SubID),
-  FOREIGN KEY (StudentID) REFERENCES student (StudentID)
-  );
-  
-  
+insert into Class values (1,'A1', '2008-12-20', 1), (2, 'A2', '2008-12-22', 1), (3, 'B3', current_date, 0);
+insert into Student (StudentName, Address, Phone, Status, ClassId) values ('Hung', 'Ha Noi', '0912113113', 1, 1), ('Manh', 'HCM', '0123123123', 0, 2);
+insert into Student (StudentName, Address, Status, ClassId) values ('Hoa', 'Hai phong', 1, 1);
+insert into Subject values (1, 'CF', 5, 1),
+       (2, 'C', 6, 1),
+       (3, 'HDJ', 5, 1),
+       (4, 'RDBMS', 10, 1);
+insert into Mark values (1, 1, 8, 1),
+       (1, 2, 10, 2),
+       (2, 1, 12, 1);
